@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events Demo</title>
+
+<style>
+table{
+    width:100%;
+    height:100vh;
+    border-collapse: collapse;
+}
+
+td{
+    padding:15px;
+    text-align:center;
+    border:2px solid black;
+}
+</style>
+</head>
+
+<body>
+
+<table>
+
+<tr>
+<td id="1">Onclick</td>
+<td id="2">Dblclick</td>
+<td id="3">Mousedown</td>
+<td id="4">Mouseup</td>
+<td id="5">Mouseenter</td>
+</tr>
+
+<tr>
+<td id="6">Mouseleave</td>
+<td id="7">Contextmenu</td>
+<td tabindex="0" id="8">Keydown</td>
+<td tabindex="0" id="9">Keyup</td>
+<td tabindex="0" id="10">Keypress</td>
+</tr>
+
+<tr>
+<td id="11">Mouseover</td>
+<td id="12">Mouseout</td>
+<td id="13">Mousemove</td>
+<td id="14">Wheel</td>
+<td id="15">Scroll</td>
+</tr>
+
+<tr>
+<td id="16">Focus</td>
+<td id="17">Blur</td>
+<td id="18">Input</td>
+<td id="19">Change</td>
+<td id="20">Copy</td>
+</tr>
+
+<tr>
+<td id="21">Cut</td>
+<td id="22">Paste</td>
+<td id="23">Drag</td>
+<td id="24">Dragend</td>
+<td id="25">Drop</td>
+</tr>
+
+</table>
+
+<script>
+
+let click = document.getElementById("1");
+click.addEventListener("click",function(){
+click.innerText="Clicked";
+click.style.backgroundColor="lightblue";
+})
+
+let dblclick = document.getElementById("2");
+dblclick.addEventListener("dblclick",function(){
+dblclick.innerText="Double Clicked";
+dblclick.style.backgroundColor="lightgreen";
+})
+
+let mousedown = document.getElementById("3");
+mousedown.addEventListener("mousedown",function(){
+mousedown.innerText="Mouse Down";
+mousedown.style.backgroundColor="lightyellow";
+})
+
+let mouseup = document.getElementById("4");
+mouseup.addEventListener("mouseup",function(){
+mouseup.innerText="Mouse Up";
+mouseup.style.backgroundColor="lightcoral";
+})
+
+let mouseenter = document.getElementById("5");
+mouseenter.addEventListener("mouseenter",function(){
+mouseenter.innerText="Mouse Entered";
+mouseenter.style.backgroundColor="lightpink";
+})
+
+let mouseleave = document.getElementById("6");
+mouseleave.addEventListener("mouseleave",function(){
+mouseleave.innerText="Mouse Left";
+mouseleave.style.backgroundColor="lightgray";
+})
+
+let contextmenu = document.getElementById("7");
+contextmenu.addEventListener("contextmenu",function(e){
+e.preventDefault();
+contextmenu.innerText="Right Clicked";
+alert("Right Clicked");
+})
+
+let keydown = document.getElementById("8");
+keydown.addEventListener("keydown",function(){
+keydown.innerText="Key Down";
+keydown.style.backgroundColor="lightcyan";
+})
+
+let keyup = document.getElementById("9");
+keyup.addEventListener("keyup",function(){
+keyup.innerText="Key Up";
+keyup.style.backgroundColor="lightgreen";
+})
+
+let keypress = document.getElementById("10");
+keypress.addEventListener("keypress",function(){
+keypress.innerText="Key Press";
+keypress.style.backgroundColor="orange";
+})
+
+let mouseover = document.getElementById("11");
+mouseover.addEventListener("mouseover",function(){
+mouseover.innerText="Mouse Over";
+mouseover.style.backgroundColor="violet";
+})
+
+let mouseout = document.getElementById("12");
+mouseout.addEventListener("mouseout",function(){
+mouseout.innerText="Mouse Out";
+mouseout.style.backgroundColor="lightblue";
+})
+
+let mousemove = document.getElementById("13");
+mousemove.addEventListener("mousemove",function(){
+mousemove.innerText="Mouse Moving";
+mousemove.style.backgroundColor="lightgreen";
+})
+
+let wheel = document.getElementById("14");
+wheel.addEventListener("wheel",function(){
+wheel.innerText="Mouse Wheel";
+wheel.style.backgroundColor="pink";
+})
+
+let scroll = document.getElementById("15");
+scroll.addEventListener("wheel",function(){
+scroll.innerText="Scrolling";
+scroll.style.backgroundColor="yellow";
+})
+
+let focus = document.getElementById("16");
+focus.tabIndex = 0;
+focus.addEventListener("focus",function(){
+focus.innerText="Focused";
+focus.style.backgroundColor="lightcyan";
+})
+
+let blur = document.getElementById("17");
+blur.tabIndex = 0;
+blur.addEventListener("blur",function(){
+blur.innerText="Blurred";
+blur.style.backgroundColor="lightgray";
+})
+
+let input = document.getElementById("18");
+input.innerHTML="<input placeholder='Type here'>";
+input.querySelector("input").addEventListener("input",function(){
+input.style.backgroundColor="lightgreen";
+})
+
+let change = document.getElementById("19");
+change.innerHTML="<input placeholder='Change value'>";
+change.querySelector("input").addEventListener("change",function(){
+change.style.backgroundColor="lightblue";
+})
+
+let copy = document.getElementById("20");
+copy.innerHTML="<input value='Copy this'>";
+copy.querySelector("input").addEventListener("copy",function(){
+alert("Copied");
+})
+
+let cut = document.getElementById("21");
+cut.innerHTML="<input value='Cut this'>";
+cut.querySelector("input").addEventListener("cut",function(){
+alert("Cut text");
+})
+
+let paste = document.getElementById("22");
+paste.innerHTML="<input placeholder='Paste here'>";
+paste.querySelector("input").addEventListener("paste",function(){
+alert("Pasted");
+})
+
+let drag = document.getElementById("23");
+drag.innerHTML="<div draggable='true'>Drag Me</div>";
+drag.querySelector("div").addEventListener("dragstart",function(){
+drag.style.backgroundColor="lightgreen";
+})
+
+let dragend = document.getElementById("24");
+dragend.innerHTML="<div draggable='true'>Drag End</div>";
+dragend.querySelector("div").addEventListener("dragend",function(){
+dragend.style.backgroundColor="lightcoral";
+})
+
+let drop = document.getElementById("25");
+drop.innerText="Drop Here";
+
+drop.addEventListener("dragover",function(e){
+e.preventDefault();
+})
+
+drop.addEventListener("drop",function(){
+drop.innerText="Dropped!";
+drop.style.backgroundColor="lightblue";
+})
+
+</script>
+
+</body>
+</html>
