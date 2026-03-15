@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3x3 Table</title>
+<style>
+    /* Remove default spacing */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #2c3e50; /* road-like background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main Junction Layout */
+table {
+    border-collapse: collapse;
+}
+
+/* Road blocks */
+td {
+    width: 120px;
+    height: 120px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Inner signal tables */
+#innertable td {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;   /* Makes lights circular */
+    background-color: #111; /* OFF state */
+    border: 2px solid #555;
+    transition: 0.3s;
+}
+
+/* Center Junction */
+table > tbody > tr:nth-child(2) > td:nth-child(2) {
+    background-color: #444;
+}
+
+/* Road Styling */
+table > tbody > tr:nth-child(1) > td:nth-child(2),
+table > tbody > tr:nth-child(2) > td:nth-child(1),
+table > tbody > tr:nth-child(2) > td:nth-child(3),
+table > tbody > tr:nth-child(3) > td:nth-child(2) {
+    background-color: #3b3b3b;
+}
+
+/* Optional glow effects */
+
+.green {
+    background-color: #00ff00 !important;
+    box-shadow: 0 0 15px #00ff00;
+}
+
+.yellow {
+    background-color: yellow !important;
+    box-shadow: 0 0 15px yellow;
+}
+
+.red {
+    background-color: red !important;
+    box-shadow: 0 0 15px red;
+}
+</style>
+<!-- <link rel="stylesheet" href="signal.css"/> -->
+</head>
+<body>
+
+<table>
+    <tr>
+        <td></td>
+        <td>
+            <table id="innertable">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td id="ng">NG</td>
+                    <td id="ny">NY</td>
+                    <td id="nr">NR </td>
+                </tr>
+            </table>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <table id="innertable">
+                <tr>
+                    <td></td>
+                    <td id="wr">WG</td>
+                </tr>
+                 <tr>
+                    <td></td>
+                    <td id="wy">WY</td>
+                </tr>
+                 <tr>
+                    <td></td>
+                    <td id="wg">WR</td>
+                </tr>
+            </table>
+        </td>
+        <td></td>
+        <td>
+            <table id="innertable">
+                <tr>
+                    <td id="eg">EG</td>
+                    <td></td>
+                </tr>
+                 <tr>
+                    <td id="ey">EY</td>
+                    <td></td>
+                </tr>
+                 <tr>
+                    <td id="er">ER</td>
+                    <td></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td> <table id="innertable">
+                <tr>
+                    <td id="sg">SG</td>
+                    <td id="sy">SY</td>
+                    <td id="sr">SR</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table></td>
+        <td></td>
+    </tr>
+</table>
+</body>
+<script>
+let ng = document.getElementById("ng")
+let ny = document.getElementById("ny")
+let nr = document.getElementById("nr")
+
+let sg = document.getElementById("sg")
+let sy =  document.getElementById("sy")
+let sr =  document.getElementById("sr")
+
+let wg =  document.getElementById("wg")
+let wy =  document.getElementById("wy")
+let wr =  document.getElementById("wr")
+
+let eg =  document.getElementById("eg")
+let ey =  document.getElementById("ey")
+let er =  document.getElementById("er")
+
+const roads = [
+   { g: ng, y: ny, r: nr },
+   { g: eg, y: ey, r: er },
+   { g: sg, y: sy, r: sr },
+   { g: wg, y: wy, r: wr }
+];
+let currentRoad = 0;
+let currentPhase = "green";
+let timeLeft = 20;
+
+function resetAll() {
+    roads.forEach(road => {
+
+        // Turn red ON
+        road.r.style.backgroundColor = "red";
+
+        // Turn green OFF
+        road.g.style.backgroundColor = "";
+
+        // Turn yellow OFF
+        road.y.style.backgroundColor = "";
+
+    });
+}
+function applyPhase() {
+
+   resetAll();
+
+   let road = roads[currentRoad];
+
+   // Remove red for active road
+   road.r.style.backgroundColor = "";
+
+   if (currentPhase === "green") {
+       road.g.style.backgroundColor = "green";
+   } else {
+       road.y.style.backgroundColor = "yellow";
+   }
+}
+setInterval(() => {
+
+   applyPhase();
+
+   timeLeft--;
+
+   if (timeLeft === 0) {
+
+      if (currentPhase === "green") {
+          currentPhase = "yellow";
+          timeLeft = 5;
+      } else {
+          currentPhase = "green";
+          currentRoad = (currentRoad + 1) % roads.length;
+          timeLeft = 20;
+      }
+   }
+}, 1000);
+
+</script>
+</html>
