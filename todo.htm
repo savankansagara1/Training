@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="inp" />
+    <input type="button" id="addBtn" onclick="addTask()" value="Add" />
+    <ul id="taskList"></ul>
+  </body>
+  <script>
+    function addTask() {
+      const inpval = document.getElementById("inp");
+      const removebtn = document.createElement("button");
+      removebtn.innerHTML = "remove";
+      //  console.log(inpval)
+      let li = document.createElement("li");
+
+      li.textContent = inpval.value;
+      li.appendChild(removebtn);
+      inpval.value = "";
+
+      document.getElementById("taskList").appendChild(li);
+
+      removebtn.addEventListener("click", () => removebutton(removebtn));
+
+      btn.appendChild(li);
+
+      function removebutton() {
+        const remove = removebtn.closest("li");
+        remove.remove();
+        
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table with Input</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Add Person</h2>
+
+<input type="text" id="name" placeholder="Enter Name">
+<input type="number" id="age" placeholder="Enter Age">
+<input type="text" id="city" placeholder="Enter City">
+<button onclick="addData()">Add</button>
+
+<table id="dataTable">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>City</th>
+        <th><button>D</button></th>
+    </tr>
+</table>
+
+<script>
+function addData() {
+    const name = document.getElementById("name").value;
+    const age = document.getElementById("age").value;
+    const city = document.getElementById("city").value;
+
+
+    if (name === "" || age === "" || city === "") {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    const table = document.getElementById("dataTable");
+    const newRow = table.insertRow();
+
+       let delbtn = document.createElement("button");
+        delbtn.onclick= function(){
+        newRow.remove()
+    }
+    delbtn.innerHTML="DELETE";
+
+    newRow.insertCell(0).innerHTML = name;
+    newRow.insertCell(1).innerHTML = age;
+    newRow.insertCell(2).innerHTML = city;
+    let del = newRow.insertCell(3)
+    del.appendChild(delbtn);
+    
+
+    // Clear inputs after adding
+    document.getElementById("name").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("city").value = "";
+}
+</script>
+</body>
+</html>

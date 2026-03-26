@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    button{
+        height: 50px;
+        width: 100px;
+        cursor: pointer;
+    }
+    #checkin{
+        opacity: 1;
+        background-color: green;
+    }
+      #breakin{
+        opacity: 0.2;
+        background-color: orange;
+    }
+
+     #checkout{
+        opacity: 0.2;
+        background-color: red;
+    }
+     #breakout{
+        opacity: 0.2;
+        background-color: orange;
+    }
+    
+</style>
+<body>
+    <div id="container ">
+    <button type="button" id="checkin" onclick="checkin()">Check in</button>
+    <button type="button" id="breakin" onclick="breakin()">Break In</button>
+    <button type="button" id="checkout" onclick="checkout()">Check Out</button>
+    <button type="button" id="breakout" onclick="breakout()">Break Out</button>
+    </div>
+
+    <div>
+        <p id="checkintxt"></p>
+        <p id="breakintxt"></p>
+        <p id="checkouttxt"></p>
+        <p id="breakouttxt"></p>
+    </div>
+
+
+
+</body>
+<script>
+    const btns = {
+        checkin:document.getElementById("checkin"),
+        breakin:document.getElementById("breakin"),
+        checkout:document.getElementById("checkout"),
+        breakout:document.getElementById("breakout")
+    }
+
+    const logs = {
+        chtext:document.getElementById("checkintxt"),
+        britext:document.getElementById("breakintxt"),
+        chotxt:document.getElementById("checkouttxt"),
+        brotxt:document.getElementById("breakouttxt"),
+    }
+
+    function checkin() {
+
+        btns.checkin.style.opacity=0.3
+        btns.breakin.style.opacity=1
+         btns.checkout.style.opacity=1
+        logs.chtext.innerHTML = `Checked in at ${getTime()}`
+
+        if(logs.chtext.innerHTML = `Checked in at ${getTime()}`){
+            btns.checkin.disabled = true
+            btns.checkin.style.pointerEvents="none"
+        }
+
+        btns.checkin.disabled = true
+        // btns.breakout.disabled = true
+        
+    }
+    function checkout() {
+        btns.checkout.style.opacity=0.3
+      btns.breakin.style.opacity=0.3
+         btns.checkin.style.opacity=1
+        
+        logs.chotxt.innerHTML = `Checked out at ${getTime()}`
+
+            if(logs.chotext.innerHTML = `Checked in at ${getTime()}`){
+            
+        }
+         defaultfun()
+    }
+
+    function breakin() {
+        btns.breakin.style.opacity=0.3
+        btns.breakout.style.opacity=1
+         logs.britext.innerHTML = `Break in at ${getTime()}`
+
+       
+    }
+
+    function breakout() {
+        btns.breakout.style.opacity = 0.3
+       
+         logs.brotxt.innerHTML = `Break out at ${getTime()}`
+    }
+
+
+    function getTime() {
+        let newDate = new Date()
+        return newDate.toLocaleTimeString()
+    }
+
+    function defaultfun (){
+btns.breakin.disabled = true;
+  btns.breakin.style.pointerEvents="none"
+  btns.breakin.style.cursor = "not-allowed"
+btns.breakout.disabled = true;
+  btns.breakout.style.pointerEvents="none"
+btns.checkout.disabled = true;
+  btns.checkout.style.pointerEvents="none"
+btns.checkin.disabled = false;
+    }
+   
+</script>
+</html>
