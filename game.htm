@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Spot Game</title>
+
+<style>
+    body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+    }
+
+    #container{
+        text-align: center;
+    }
+
+    #grid{
+        display: grid;
+        height: 400px;
+        width: 400px;
+        gap: 4px;
+        margin-top: 10px;
+    }
+
+    .box{
+        aspect-ratio: 1/1;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+
+<div id="container">
+    <p id="scr">Score: 0 | Wrong: 0/3</p>
+    <div id="grid"></div>
+</div>
+
+<script>
+
+let size = 2;
+let wrongCount = 0;
+let gameOver = false;
+let score = 0;
+
+const grid = document.getElementById("grid");
+const scr = document.getElementById("scr");
+
+function generateRandomColor(){
+    const colors = ['red','blue','pink','green','yellow','skyblue','purple'];
+    return colors[Math.floor(Math.random()*colors.length)];
+}
+
+function createGrid(){
+
+    if(gameOver) return;
+
+    grid.innerHTML = "";
+
+    scr.innerHTML = `Score: ${score} | Wrong: ${wrongCount}/3`;
+
+    grid.style.gridTemplateColumns = `repeat(${size},1fr)`;
+
+    const total = size * size;
+    const darkIndex = Math.floor(Math.random() * total);
+    const color = generateRandomColor();
+
+    for(let i = 0; i < total; i++){
+
+        const box = document.createElement("div");
+        box.className = "box";
+        box.style.backgroundColor = color;
+
+    
+        if(i === darkIndex){
+            box.style.filter = "brightness(50%)";
+
+            setTimeout(()=>{
+                box.style.filter = "brightness(100%)";
+            },500);
+
+            box.onclick = function(){
+                if(gameOver) return;
+
+                size++;
+                score++;
+                createGrid();
+            };
+        }
+
+
+        else{
+            box.onclick = function(){
+                if(gameOver) return;
+
+                wrongCount++;
+                box.style.filter = "brightness(20%)";
+
+                scr.innerHTML = `Score: ${score} | Wrong: ${wrongCount}/3`;
+
+                if(wrongCount >= 3){
+                    gameOver = true;
+
+                    setTimeout(()=>{
+                        alert("Game Over!");
+                        grid.innerHTML = "";
+                    },200);
+                }
+            };
+        }
+
+        grid.appendChild(box);
+    }
+}
+
+createGrid();
+
+</script>
+
+</body>
+</html>
