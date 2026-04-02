@@ -1,0 +1,96 @@
+create database combo;
+use combo;
+
+drop database combo;
+
+ALTER TABLE select_master RENAME COLUMN html_tag TO s_html_tag;
+
+SELECT 
+    s.select_id,
+    s.field_name,
+    s.s_html_tag,
+    s.html_name,
+    s.html_id,
+    o.html_tag,
+    o.html_type,
+    o.html_value,
+    o.html_label,
+    parent_id
+FROM
+    select_master s
+        JOIN
+    option_master o ON s.select_id = o.select_id
+WHERE
+    field_name = 'gender';
+
+
+insert into select_master (field_name,html_tag,html_name,html_id) values 
+("gender",null,"gender","gender"),
+("relationship_status","select","relation","relation");
+
+select * from select_master;
+select * from option_master;
+
+insert into option_master (select_id,html_tag,html_type,html_value,html_label,parent_id) values 
+(1,"input","radio","Male","Male",null),
+(1,"input","radio","Female","Female",null),
+(2,"option",null,"Single", "Single",null),
+(2,"option",null,"Married","Married",null),
+(2,"option",null,"Divorced","Divorced",null);
+
+insert into select_master(field_name,s_html_tag,html_name,html_id) values 
+("department","select","department","department");
+
+insert into option_master (select_id,html_tag,html_type,html_value,html_label,parent_id) values 
+(3,"option",null,"Hr","Hr",null),
+(3,"option",null,"Marketing","Marketing",null);
+
+insert into select_master(field_name,s_html_tag,html_name,html_id) values 
+("Language",null,null,null);
+
+insert into option_master(select_id,html_tag,html_type,html_value,html_label,parent_id) values 
+(4,null,null,"eng","English",null),
+(4,"input","checkbox","read","englishread",null),
+(4,"input","checkbox","write","englishwrite",null),
+(4,"input","checkbox","speak","englishspeak",null);
+
+insert into option_master(select_id,html_tag,html_type,html_value,html_label,parent_id) values 
+(4,null,null,"hin","Hindi",null),
+(4,"input","checkbox","read","hindiread",null),
+(4,"input","checkbox","write","hidiwrite",null),
+(4,"input","checkbox","speak","hindispeak",null);
+
+insert into option_master(select_id,html_tag,html_type,html_value,html_label,parent_id) values 
+(4,null,null,"guj","Gujrati",null),
+(4,"input","checkbox","read","gujaratiread",null),
+(4,"input","checkbox","write","gujaratiwrite",null),
+(4,"input","checkbox","speak","gujaratispeak",null);
+
+insert into select_master(field_name,s_html_tag,html_name,html_id) values 
+("Technology",null,null,null);
+
+insert into option_master(select_id,html_tag,html_type,html_value,html_label,parent_id) values 
+(5,null,null,"python","Python",null),
+(5,"input","checkbox","beginner","pybeginner",null),
+(5,"input","checkbox","Intermediate","pyintermediate",null),
+(5,"input","checkbox","expert","pyexpert",null);
+
+insert into option_master(select_id,html_tag,html_type,html_value,html_label,parent_id) values 
+(5,null,null,"java","Java",null),
+(5,"input","checkbox","beginner","jbeginner",null),
+(5,"input","checkbox","Intermediate","jintermediate",null),
+(5,"input","checkbox","expert","jexpert",null);
+
+
+create Table basic_table(
+    basic_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(50),
+    city VARCHAR(50),
+    state1 VARCHAR(50),
+    designation VARCHAR(50),
+    gender VARCHAR(50),
+    rs varchar(10),
+    phoneno VARCHAR(10)
+); 
